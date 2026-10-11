@@ -671,6 +671,14 @@ html.dark {
   .marquee:hover {
     animation-play-state: paused;
   }
+
+  /* #103 — horizontal chip rails hide their scrollbar on mobile */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* =========================================================

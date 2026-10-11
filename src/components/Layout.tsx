@@ -428,8 +428,14 @@ function MobileDrawer({ open, onClose, categories, user, onLogout }: {
         id="mobile-drawer"
         aria-label="قائمة التنقل"
         aria-hidden={!open}
+        inert={!open}
+        style={{
+          /* explicit transform — the RTL translate utility variant out-cascades
+             translate-x-0 in the compiled sheet, so drive it inline instead */
+          transform: open ? 'translateX(0)' : 'translateX(100%)',
+        }}
         className={`glass-strong fixed inset-y-0 start-0 z-50 flex w-80 max-w-[85vw] flex-col overflow-y-auto border-e border-white/60 p-4 shadow-2xl transition-transform duration-300 lg:hidden ${
-          open ? 'translate-x-0' : 'rtl:translate-x-full ltr:-translate-x-full'
+          open ? '' : 'pointer-events-none'
         }`}
       >
         <div className="flex items-center justify-between pb-2">
@@ -660,10 +666,10 @@ export default function Layout() {
                   <span className="pulse-ok absolute -top-1 -left-1 h-2.5 w-2.5 rounded-full bg-emerald-500" />
                 </Link>
 
-                {/* #39 — account avatar */}
+                {/* #39 — account avatar (available from sm; on xs it lives in the drawer) */}
                 <Link
                   to="/orders"
-                  className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gradient-to-br from-brand-500 via-violet-500 to-fuchsia-500 font-display text-sm font-extrabold text-white shadow-lg shadow-indigo-500/30 ring-2 ring-white/70"
+                  className="hidden h-10 w-10 shrink-0 place-items-center rounded-full bg-gradient-to-br from-brand-500 via-violet-500 to-fuchsia-500 font-display text-sm font-extrabold text-white shadow-lg shadow-indigo-500/30 ring-2 ring-white/70 sm:grid"
                   title={user.name}
                   aria-label={`حساب ${user.name}`}
                 >
@@ -671,7 +677,7 @@ export default function Layout() {
                 </Link>
 
                 <button
-                  className="btn btn-ghost !px-2.5 sm:!px-4"
+                  className="btn btn-ghost hidden !px-2.5 sm:inline-flex sm:!px-4"
                   onClick={() => void logout()}
                   aria-label="تسجيل الخروج"
                 >

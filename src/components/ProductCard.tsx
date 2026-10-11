@@ -124,9 +124,9 @@ export default function ProductCard({ product }: { product: Product }) {
           )}
         </div>
 
-        {/* #51 — add-to-cart slides up from the bottom on hover */}
+        {/* #51 — add-to-cart slides up from the bottom on hover; on touch (no hover) it stays visible */}
         {!out && (
-          <div className="absolute inset-x-3 -bottom-14 z-10 transition-all duration-300 group-hover:bottom-3 group-focus-within:bottom-3">
+          <div className="absolute inset-x-3 bottom-3 z-10 transition-all duration-300 sm:-bottom-14 sm:group-hover:bottom-3 sm:group-focus-within:bottom-3">
             <button className="btn btn-primary w-full py-2.5 shadow-xl" disabled={out} onClick={addToCart}>
               {added ? 'تمت الإضافة ✓' : '🛒 أضف للسلة'}
             </button>
